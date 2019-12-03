@@ -11,5 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/bootstrap.js', 'public/js')
+    .js('resources/js/jquery.js', 'public/js')
+    .js('resources/js/jquery-easing.js', 'public/js')
+    .js('resources/js/creative.js', 'public/js')    
+    .sass('resources/sass/magnific-popup.scss', 'public/css')
+    .sass('resources/sass/font-awesome.scss', 'public/css')
+    .sass('resources/sass/creative.scss', 'public/css');
