@@ -1,9 +1,5 @@
 {
-    "/js/bootstrap.js": "/js/bootstrap.js",
-    "/css/magnific-popup.css": "/css/magnific-popup.css",
-    "/css/font-awesome.css": "/css/font-awesome.css",
-    "/css/creative.css": "/css/creative.css",
-    "/js/creative.js": "/js/creative.js",
-    "/js/jquery.js": "/js/jquery.js",
-    "/js/jquery-easing.js": "/js/jquery-easing.js"
+    "/vendor/ckeditor/ckeditor.js": "/vendor/ckeditor/ckeditor.js",
+    "/vendor/ckeditor/config.js": "/vendor/ckeditor/config.js",
+    "/vendor/ckeditor/styles.js": "/vendor/ckeditor/styles.js"
 }

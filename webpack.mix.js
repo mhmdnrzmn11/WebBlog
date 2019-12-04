@@ -11,10 +11,10 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/bootstrap.js', 'public/js')
-    .js('resources/js/jquery.js', 'public/js')
-    .js('resources/js/jquery-easing.js', 'public/js')
-    .js('resources/js/creative.js', 'public/js')    
-    .sass('resources/sass/magnific-popup.scss', 'public/css')
-    .sass('resources/sass/font-awesome.scss', 'public/css')
-    .sass('resources/sass/creative.scss', 'public/css');
+mix.copyDirectory('node_modules/ckeditor/plugins', 'public/vendor/ckeditor/plugins')
+   .copyDirectory('node_modules/ckeditor/skins', 'public/vendor/ckeditor/skins')
+   .copyDirectory('node_modules/ckeditor/skins', 'public/vendor/ckeditor/skins')
+   .copyDirectory('node_modules/ckeditor/lang', 'public/vendor/ckeditor/lang')
+   .copy('node_modules/ckeditor/ckeditor.js', 'public/vendor/ckeditor')
+   .copy('node_modules/ckeditor/config.js', 'public/vendor/ckeditor')
+   .copy('node_modules/ckeditor/styles.js', 'public/vendor/ckeditor');

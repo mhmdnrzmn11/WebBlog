@@ -11,17 +11,17 @@
   <title>Creative - Start Bootstrap Theme</title>
 
   <!-- Font Awesome Icons -->
-  <link href="css/app.css" rel="stylesheet" type="text/css">
+  <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <!-- Plugin CSS -->
-  <link href="css/magnific-popup.css" rel="stylesheet">
+  <link href="{{asset('css/magnific-popup.css')}}" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="css/creative.css" rel="stylesheet">
+  <link href="{{asset('css/creative.css')}}" rel="stylesheet">
 
 </head>
 
@@ -92,15 +92,17 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+  <script src="{{asset('vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/creative.js"></script>
+  <script src="{{asset('js/creative.js')}}"></script>
+
+  @yield('scripts')
 
 </body>
 

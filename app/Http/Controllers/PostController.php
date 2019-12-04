@@ -4,20 +4,59 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Session;
 use Auth;
 
 use App\Post;
 use App\User;
+use App\PostCategory;
 
 class PostController extends Controller
 {
     public function index(Post $post)
     {
         $user = Auth::user();
-        $post = Post::all();
+        $post = Post::where('author_id', $user->id)->get();
             
 
-        return view('post.index', compact('user', 'post'));
+        return view('story.index', compact('user', 'post'));
+    }
+
+    public function create()
+    {
+        $user = Auth::user();
+        $category = PostCategory::get();
+
+        return view('story.create', compact('user', 'category'));
+    }
+
+    public function imageUpload(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+      
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+      
+            //get file extension
+            $extension = $request->file('upload')->getClientOriginalExtension();
+      
+            //filename to store
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+      
+            //Upload File
+            $request->file('upload')->storeAs('public/uploads', $filenametostore);
+ 
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('storage/uploads/'.$filenametostore); 
+            $msg = 'Image successfully uploaded'; 
+            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+             
+            // Render HTML output 
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $re;
+        }
     }
 
     public function store(Request $request)

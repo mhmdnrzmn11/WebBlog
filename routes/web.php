@@ -18,4 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/posts', 'PostController@index')->name('post');
+Route::get('me/stories', 'PostController@index')->name('story');
+Route::get('me/stories/create', 'PostController@create')->name('story.create');
+Route::post('ck/image_upload', 'PostController@imageUpload')->name('ck.upload');

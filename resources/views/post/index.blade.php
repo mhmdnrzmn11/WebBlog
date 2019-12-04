@@ -83,8 +83,8 @@
                 @if ($post->count() == 0)
                     <div class="row  mt-5 mb-5">
                         <div class="col-sm text-center">
-                            <h5 class="text-center">You don't have any Post</h5>                                        
-                            <p>Create your first Post</p>
+                            <h5 class="text-center">You don't have any Stories</h5>                                        
+                            <p>Create your first story</p>
                         </div>
                     </div>
                 @else
