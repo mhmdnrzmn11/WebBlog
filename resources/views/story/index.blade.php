@@ -8,7 +8,7 @@
                 <div class="navbar-brand text-dark">My Stories</div>
                 <div class="form-inline">
                     <form class="form-inline my-2 my-lg-0" action="">                        
-                        <a class="btn btn-outline-primary btn-md my-2 my-sm-0 ml-3" href="{{route('story.create')}}">Write a story</a>
+                        <a class="btn btn-outline-primary btn-md my-2 my-sm-0 ml-3" href="{{route('stories.create')}}">Write a story</a>
                     </form>                
                 </div>
             </nav>
@@ -37,8 +37,9 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center border-top-0">#</th>
-                                            <th class="text-center border-top-0">Lesson Title</th>
-                                            <th class="text-center border-top-0">Status</th>
+                                            <th class="text-center border-top-0">Story Title</th>
+                                            <th class="text-center border-top-0">Published Date</th>
+                                            <th class="text-center border-top-0">Category</th>
                                             <th class="text-center border-top-0 pr-4 pb-2">                                                
                                             </th>
                                         </tr>
@@ -49,10 +50,11 @@
                                                 <td class="text-center">{{$loop->iteration}}</td>
                                                 <td class="text-center"><b>{{$item->title}}</b></td>
                                                 <td class="text-center">{{$item->tanggal}}</td>
+                                                <td class="text-center">{{$item->category->nama}}</td>
                                                 <td class="text-center fit">
                                                     <button class="btn btn-sm my-0 btn-outline-primary">Preview</button>
-                                                    <button class="btn btn-sm my-0 btn-outline-success">Edit</button>                                                    
-                                                    <form class="d-inline" action="" method="post">
+                                                    <a class="btn btn-sm my-0 btn-outline-success" href="{{route('stories.edit', $item->id)}}">Edit</a>
+                                                    <form class="d-inline" action="{{route('stories.destroy', $item->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm my-0 btn-outline-danger">Delete</button>

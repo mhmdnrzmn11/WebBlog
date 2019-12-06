@@ -22,13 +22,19 @@ class PostController extends Controller
         return view('story.index', compact('user', 'post'));
     }
 
+    public function edit(Post $post)
+    {
+        $post = Post::where('author_id', Auth::user()->id)->first();
+        return view('story.edit', compact('post'));
+    }
+
     public function create()
     {
         $user = Auth::user();
         $category = PostCategory::get();
 
         return view('story.create', compact('user', 'category'));
-    }
+    }    
 
     public function imageUpload(Request $request)
     {
@@ -60,48 +66,50 @@ class PostController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {                
+        $user = Auth::user();
         $request->validate([
             'title' => 'required|string',
+            'category' => 'required',
+            'thumbnail' => 'required',
             'content' => 'required',
-            'date' => 'required',
-            'category_id' => 'required',            
         ]);
 
-        $post = new Post([
-            'title' => $request->get('title'),
-            'content' => $request->get('content'),
-            'date' => date('d-m-Y'),
-            'category_id' => $request->get('catogory_id'),
-            'author_id' => $request->get('author_id')
-        ]);
+        $thumbnailName = time().'.'.request()->thumbnail->getClientOriginalExtension();
 
-        if ($post->save()) {
-            return Redirect::back()->with('Succes', 'Post has been Added');
-        }
-
-    }
-
-    public function update(Request $request, Post $post)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'content' => 'required',
-            'date' => 'required',
-            'category_id' => 'required',            
-        ]);
-
+        $post = new Post;
         $post->title = $request->title;
-        $post->content = $request->content;
-        $post->date = date('d-m-Y');
-        $post->category_id = $request->category_id;
-        $post->author_id = $request->author_id;
-
+        $post->category_id = $request->category;
+        $post->thumbnail = $thumbnailName;
+        $post->content = $request->content;       
+        $post->tanggal = date('Y-m-d');
+        $post->author_id = $user->id;
         $post->save();
 
-        Session::flash('Success', 'Post has been Updated');
+        $request->thumbnail->move('storage/uploads', $thumbnailName);
+        return redirect('me/stories')->with('Succes', 'Story has been published')->with('thumbnail', $thumbnailName);                    
+    }
 
-        return redirect()->back();
+    
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'content' => 'required',            
+        ]);
+        
+        $update = array(
+            'title'     =>  $request->title,
+            'content'   =>  $request->content
+        );
+        
+        $post = Post::where('id', $id);
+        $post->update($update);
+
+        Session::flash('Success', 'Story has been Updated');
+
+        return redirect(route('stories.index'));
     }
 
     public function destroy($id)
@@ -109,6 +117,6 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return Redirect::back()->with('Success', 'Post has been Removed');
+        return redirect()->back()->with('Success', 'Post has been Removed');
     }
 }

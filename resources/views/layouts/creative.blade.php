@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Creative - Start Bootstrap Theme</title>
+  <title>Media Creative</title>
 
   <!-- Font Awesome Icons -->
   <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
@@ -23,6 +23,8 @@
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="{{asset('css/creative.css')}}" rel="stylesheet">
 
+  @yield('styles')
+
 </head>
 
 <body id="page-top">
@@ -30,24 +32,27 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-scrolled py-3" id="secNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+      <a class="navbar-brand js-scroll-trigger" href="{{route('welcome')}}">CreativeMedia</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">Write</a>
+            @guest
+            @if (Route::has('register'))
+            <a class="nav-link js-scroll-trigger" href="{{route('stories.index')}}">Write</a>
+            @else            
+            <a class="nav-link js-scroll-trigger" href="{{route('login')}}">Write</a>
+            @endif    
+            @endguest
           </li>          
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#portfolio">Category</a>
+            <a class="nav-link js-scroll-trigger" href="{{route('story.index')}}">Stories</a>
           </li>
           <!-- <a class="nav-link js-scroll-trigger text-primary" href="#contact">Log In</a> -->
           <!-- Authentication Links -->
-          @guest
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Subscribe</a>
-            </li>
+          @guest            
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger text-primary" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
@@ -63,6 +68,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('stories.index') }}">Write Story</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                           onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

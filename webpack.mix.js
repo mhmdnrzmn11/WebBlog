@@ -17,4 +17,5 @@ mix.copyDirectory('node_modules/ckeditor/plugins', 'public/vendor/ckeditor/plugi
    .copyDirectory('node_modules/ckeditor/lang', 'public/vendor/ckeditor/lang')
    .copy('node_modules/ckeditor/ckeditor.js', 'public/vendor/ckeditor')
    .copy('node_modules/ckeditor/config.js', 'public/vendor/ckeditor')
-   .copy('node_modules/ckeditor/styles.js', 'public/vendor/ckeditor');
+   .copy('node_modules/ckeditor/styles.js', 'public/vendor/ckeditor')
+   .copy('node_modules/ckeditor/contents.css', 'public/vendor/ckeditor');

@@ -30,17 +30,24 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+      <a class="navbar-brand js-scroll-trigger" href="{{route('welcome')}}">CreativeMedia</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">Write</a>
+              @guest
+              @if (Route::has('register'))
+              <a class="nav-link js-scroll-trigger" href="{{route('login')}}">Write</a>
+              @else            
+              <a class="nav-link js-scroll-trigger" href="{{route('stories.index')}}">Write</a>
+              @endif    
+              @endguest
+            </li>          
           </li>          
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#portfolio">Category</a>
+            <a class="nav-link js-scroll-trigger" href="route('story.read')">Stories</a>
           </li>
           @guest
             <li class="nav-item">
@@ -61,6 +68,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('stories.index') }}">Write Story</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                           onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -88,7 +96,7 @@
         </div>
         <div class="col-lg-8 align-self-baseline">
           <p class="text-white-75 font-weight-light mb-5">Bagikan cerita, artikel atau pengalaman menarik anda kepada orang lain!</p>
-          <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">View story from around </a>
+          <a class="btn btn-primary btn-xl js-scroll-trigger" href="{{route('story.index')}}">View story from around </a>
         </div>
       </div>
     </div>
@@ -120,55 +128,22 @@
     <div class="container">
       <h2 class="text-center mt-0">Cerita terbaru untuk anda</h2>
       <hr class="divider my-4">
+      
       <div class="row">
-        <div class="col-lg-3 col-md-6 ">
-            <div class="mt-5">
-                <div class="card" style="max-width: 400px">
-                    <img src="" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5>Spongebob mengalahkan tuan Krab!</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        <a href="">Read More</a>
-                    </div>
-                </div>
-            </div>          
-        </div>
-        <div class="col-lg-3 col-md-6 ">
-            <div class="mt-5">
-                <div class="card">
-                    <img src="" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5>Spongebob mengalahkan tuan Krab!</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        <a href="">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 ">
-            <div class="mt-5">
-                <div class="card">
-                    <img src="" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5>Spongebob mengalahkan tuan Krab!</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        <a href="">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 ">
-            <div class="mt-5">
-                <div class="card">
-                    <img src="" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5>Spongebob mengalahkan tuan Krab!</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        <a href="">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+          @foreach ($newPost as $item)
+          <div class="col-lg-4 col-xs-12">
+              <div class="card" style="height: 400px;">
+                  <img src="storage/uploads/{{$item->thumbnail}}" class="card-img-top">
+                  <div class="card-body">
+                      <p class="card-text"><small class="text-muted">{{$item->category->nama}}</small></p>
+                      <h5>{{$item->title}}</h5>
+                  </div>
+                  <div class="card-footer text-right bg-transparent">                            
+                      <a href="{{route('story.read', $item->id)}}">Read story.</a>
+                  </div>
+              </div>
+          </div>
+          @endforeach
       </div>
     </div>
   </section>

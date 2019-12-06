@@ -1,5 +1,6 @@
 {
     "/vendor/ckeditor/ckeditor.js": "/vendor/ckeditor/ckeditor.js",
     "/vendor/ckeditor/config.js": "/vendor/ckeditor/config.js",
-    "/vendor/ckeditor/styles.js": "/vendor/ckeditor/styles.js"
+    "/vendor/ckeditor/styles.js": "/vendor/ckeditor/styles.js",
+    "/vendor/ckeditor/contents.css": "/vendor/ckeditor/contents.css"
 }
